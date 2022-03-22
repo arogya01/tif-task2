@@ -5,7 +5,7 @@ const RequistionContext = createContext();
 
 export default function RequistionDetails(props){
     const initialState = {
-        requestTitle: "let's see if this",
+        requestTitle: "",
         owner: "",
         hiringManager: "",
         openings: "",
@@ -14,11 +14,17 @@ export default function RequistionDetails(props){
       };
 
     const reducer = (state,action) => {
-     
+       const newState= {};
+
         switch(action.type){
             case "add":
-
+             newState = action.formValue;
+             break;
+             default:
+                 throw new Error();     
         }
+
+        return newState;
     };
 
 

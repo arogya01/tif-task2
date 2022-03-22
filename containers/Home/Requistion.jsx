@@ -47,8 +47,14 @@ export default function Requistion() {
       onSubmit={async (values, { setSubmitting }) => {
         await new Promise((r) => setTimeout(r, 500));
         console.log(values);
+
+        dispatch({
+          type:"add",
+          formValue:values
+        })
         setSubmitting(false);
       }}
+
     >
       
       

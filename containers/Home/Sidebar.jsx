@@ -12,14 +12,14 @@ export default function Sidebar() {
       direction="column"
         
       p={8}
-      fontStyle="italic"
+      
       css={css`
         box-shadow: -24px -24px 34px #ffffff,
           24px 24px 34px rgba(128, 135, 164, 0.13);
         border-radius: 10px;
       `}
     >
-      <Flex direction="row" p={4} m={4} justify="space-between">
+      <Flex fontStyle="italic" direction="row" p={4} m={4} justify="space-between">
         <Box>
           <Box as="p">Draft</Box>
         </Box>
@@ -55,9 +55,17 @@ export default function Sidebar() {
         </Box>
 
         <Flex direction="row" justify="space-between">
-        <Box>
+        <Box p={2} >
         <Box as="p">Owner</Box>
-        <Box>{state.owner}</Box>
+        <Box as="p">{state.owner}</Box>
+        </Box>
+        <Box p={2} >
+        <Box as="p">urgency</Box>
+        <Box as="p">{state.urgency}</Box>
+        </Box>
+        <Box p={2} >
+        <Box as="p">EmploymentType</Box>
+        <Box as="p">{state.employmentType}</Box>
         </Box>
         </Flex>
       </Flex>
