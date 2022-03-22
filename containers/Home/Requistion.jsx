@@ -1,20 +1,20 @@
 import React from "react";
 import { Formik, useFormik, useField , Form} from "formik";
-import { Box, Input, Button, Flex, FormLabel, FormErrorMessage } from "@chakra-ui/react";
+import { Box, Input, Button, Flex, FormLabel} from "@chakra-ui/react";
 import { useRequisition } from "../../components/providers/RequistionDetailsProvider";
 import * as Yup from "yup";
 
 const MyInput = ({ label, ...props }) => {
 
   const [field,meta] = useField(props);
-
+  console.log(meta);
   return (
     <>
       <FormLabel fontSize="0.8rem" >{label}</FormLabel>
       <Input {...field} {...props} />
       {
         meta.touched && meta.error ? (
-          <FormErrorMessage>{meta.error}</FormErrorMessage>
+          <Box as="p" fontSize="0.8rem" color="red.500" px={2}>{meta.error}</Box>
         ) : null 
       }
     </>
@@ -39,6 +39,16 @@ export default function Requistion() {
       validationSchema={Yup.object(
         {
           requestTitle: Yup.string()
+          .required("field is required"),
+          owner: Yup.string()
+          .required("field is required"),
+          hiringManager: Yup.string()
+          .required("field is required"),
+          openings: Yup.string()
+          .required("field is required"),
+          urgency: Yup.string()
+          .required("field is required"),
+          employementType: Yup.string()
           .required("field is required"),
 
         }
