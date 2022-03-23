@@ -4,7 +4,7 @@ import { useRequisition } from "../../components/providers/RequistionDetailsProv
 
 export default function Sidebar() {
 
-  const {state,dispatch} = useRequisition();
+  const {state : requisitionState,dispatch : requistionDispatch} = useRequisition();
 
   return (
     <Flex
@@ -54,20 +54,36 @@ export default function Sidebar() {
         <Box as="h2">Requistion Details</Box>
         </Box>
 
-        <Flex direction="row" justify="space-between">
-        <Box p={2} >
+        <Flex direction="row" justify="space-between" py={4}>
+        <Box p={4} >
+        <Box as="p">Owner</Box>
+        <Box as="p">{requisitionState.owner}</Box>
+        </Box>
+        <Box p={4} >
+        <Box as="p">urgency</Box>
+        <Box as="p">{requisitionState.urgency}</Box>
+        </Box>
+        <Box p={4} >
+        <Box as="p">EmploymentType</Box>
+        <Box as="p">{requisitionState.employmentType}</Box>
+        </Box>
+        </Flex>
+
+
+        {/* <Flex direction="row" justify="space-between" py={4}>
+        <Box p={4} >
         <Box as="p">Owner</Box>
         <Box as="p">{state.owner}</Box>
         </Box>
-        <Box p={2} >
+        <Box p={4} >
         <Box as="p">urgency</Box>
         <Box as="p">{state.urgency}</Box>
         </Box>
-        <Box p={2} >
+        <Box p={4} >
         <Box as="p">EmploymentType</Box>
         <Box as="p">{state.employmentType}</Box>
         </Box>
-        </Flex>
+        </Flex> */}
       </Flex>
     </Flex>
   );
