@@ -5,14 +5,32 @@ import videos from "../New/content/Events.json";
 import close from "../../public/new/close.svg";
 import Image from "next/image";
 import { VideoThumbnail } from "./VideoLinks";
-// import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import getYouTubeID from "get-youtube-id";
-import { Carousel } from "react-responsive-carousel";
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
+const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5,
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 5,
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2,
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+  },
+};
 
 const VideoModal = ({ videoInfo, setVideoInfo }) => {
-  console.log(videoInfo);
   const [dimensions, setDimensions] = useState({
     height: 900,
     width: 1440,
@@ -30,25 +48,29 @@ const VideoModal = ({ videoInfo, setVideoInfo }) => {
       direction="column"
       justify="space-between"
       position="fixed"
-      bg="rgba(0,0,0,0.9)"
+      bg="rgba(0,0,0)"
       zIndex="9999"
       top="0"
       bottom="0"
       left="0"
       right="0"
     >
-      <Box ml="auto" pt="1.5rem" pr="1.5rem" cursor="pointer" onClick={()=>{
-        setVideoInfo(null);
-      }}>
-        <svg data-name="Layer 1" width="48"
-            height="48" viewBox="0 0 64 64">
+      <Box
+        ml="auto"
+        pt="1.5rem"
+        pr="1.5rem"
+        cursor="pointer"
+        onClick={() => {
+          setVideoInfo(null);
+        }}
+      >
+        <svg data-name="Layer 1" width="48" height="48" viewBox="0 0 64 64">
           <line
             x1="9.37"
             x2="54.63"
             y1="9.37"
             y2="54.63"
             fill="none"
-            
             stroke="#f2f2f2"
             strokeMiterlimit="10"
             strokeWidth="2"
@@ -64,13 +86,12 @@ const VideoModal = ({ videoInfo, setVideoInfo }) => {
             strokeWidth="2"
           />
         </svg>
-        
       </Box>
-      <Flex mx="auto">
+      <Flex mx="4rem">
         <YouTube
           videoId={videoInfo.id}
           opts={{
-            width: `${dimensions.width * 0.5}px`,
+            width: `${dimensions.width * 0.6}px`,
             height: `${dimensions.height * 0.5}px`,
             playerVars: {
               modestbranding: 1,
@@ -78,13 +99,31 @@ const VideoModal = ({ videoInfo, setVideoInfo }) => {
             },
           }}
         />
-        <Box color="white" bg="#000">
-          {videoInfo.description.headlineLong}
-        </Box>
+        <Flex
+          overflowY="scroll"
+          flexDirection="column"
+          width="400px"
+          height="526px"
+          px="2rem"
+          color="white"
+          bg="#000"
+        >
+          <Box as="h2" fontSize="1.2rem" mb="2rem">
+            {videoInfo.description.headlineLong}
+          </Box>
+          <Box
+            as="p"
+            fontWeight="light"
+            mb="1rem"
+            dangerouslySetInnerHTML={{
+              __html: videoInfo.description.contentLong,
+            }}
+          />
+        </Flex>
       </Flex>
 
-      <Box overflow="hidden" width="90%" mx="auto">
-        <Flex>
+      <Box overflow="hidden" pt="4rem" width="100%" mx="auto">
+        <Carousel responsive={responsive}>
           {videos.map((el) => {
             console.log("videos is:", el);
             return (
@@ -97,22 +136,10 @@ const VideoModal = ({ videoInfo, setVideoInfo }) => {
               />
             );
           })}
-        </Flex>
+        </Carousel>
       </Box>
     </Flex>
   );
 };
 
 export default VideoModal;
-
-const Thumbnail = ({ link }) => {
-  console.log(link);
-  const id = getYouTubeID(link);
-  console.log(id);
-  return (
-    <Img
-      width="100%"
-      src={"http://img.youtube.com/vi/" + id + "/mqdefault.jpg"}
-    />
-  );
-};
