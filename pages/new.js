@@ -1,6 +1,7 @@
 import About from "../containers/New/About";
 import Community from "../containers/New/Community";
 import HeroSection from "../containers/New/HeroSection";
+import Events from "../containers/New/Events";
 import AboutImg from '../public/new/about.png';
 import imgSrcOne from '../public/new/1.png';
 import imgSrcTwo from '../public/new/2.png';
@@ -35,7 +36,11 @@ pieceTwo="The startup ecosystem in Finland is bursting with potential. The start
        imgSrcThree={imgSrcOne}
        btnName="Join Now"
       />
-
+    <Events 
+    header="Events"
+    tagLine="India-Finland Startup Hub"
+    
+    />
     </>
   );
 }
