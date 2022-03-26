@@ -12,7 +12,7 @@ export default function Community({
   imgSrcThree,
 }) {
   return (
-    <Flex direction="column" align="center" my={20}>
+    <Flex direction="column" bgColor="#EAE9E2" align="center" py={16}>
       <Box as="h2" fontSize="42px" textAlign="center">
         {header}
       </Box>
@@ -30,13 +30,13 @@ export default function Community({
 
       <Flex direction="row" align="center" justify="space-between" mt={8}>
         <Box mx={4}>
-          <Image src={imgSrcOne} alt="one" />
+          <Image src={imgSrcOne} alt="one"  width={307} height={184} />
         </Box>
         <Box mx={4}>
-          <Image src={imgSrcOne} alt="one" />
+          <Image src={imgSrcOne} alt="one"  width={307} height={184}  />
         </Box>
         <Box mx={4}>
-          <Image src={imgSrcOne} alt="one" />
+          <Image src={imgSrcOne} alt="one" width={307} height={184} />
         </Box>
       </Flex>
 
@@ -48,7 +48,8 @@ export default function Community({
         }}
         variant="outline"
         borderColor="black"
-        borderRadius={22}
+        borderRadius={20} 
+        px={8}
       >
         <Box as="span" mr={2}>
           {btnName}

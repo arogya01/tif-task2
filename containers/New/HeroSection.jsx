@@ -1,14 +1,12 @@
 import { ArrowForwardIcon } from "@chakra-ui/icons";
-import { Box, Flex , Button } from "@chakra-ui/react";
+import { Box, Flex, Button } from "@chakra-ui/react";
 import { css } from "@emotion/react";
 import Image from "next/image";
 import Logo from "../../public/new/Logo.png";
 
-
-
-export default function HeroSection({tagLine , btnName}) {
+export default function HeroSection({ tagLine, btnName }) {
   return (
-    <Flex direction="column" position="relative" align="center" >
+    <Flex direction="column" position="relative" align="center">
       <Box position="absolute" width="100%" height="835px" zIndex="hide">
         <Image
           alt="Mountains"
@@ -32,7 +30,6 @@ export default function HeroSection({tagLine , btnName}) {
           <Box
             as="span"
             bgColor="#78B3FD"
-            
             borderRight="2px"
             cursor="pointer"
             borderColor="gray"
@@ -51,9 +48,8 @@ export default function HeroSection({tagLine , btnName}) {
             cursor="pointer"
             borderColor="gray"
             _hover={{
-              color:"blue"
+              color: "blue",
             }}
-            
             px={8}
             py={2}
           >
@@ -65,9 +61,8 @@ export default function HeroSection({tagLine , btnName}) {
             cursor="pointer"
             borderColor="gray"
             _hover={{
-              color:"blue"
+              color: "blue",
             }}
-            
             px={8}
             py={2}
           >
@@ -79,49 +74,54 @@ export default function HeroSection({tagLine , btnName}) {
             cursor="pointer"
             borderColor="gray"
             _hover={{
-              color:"blue"
+              color: "blue",
             }}
-            
             px={8}
             py={2}
           >
             Community
           </Box>
-          <Box as="span" borderColor="black" cursor="pointer" 
-          _hover={{
-              color:"blue"
+          <Box
+            as="span"
+            borderColor="black"
+            cursor="pointer"
+            _hover={{
+              color: "blue",
             }}
-          px={8} py={2}>
+            px={8}
+            py={2}
+          >
             Events
           </Box>
         </Flex>
 
         <Flex mt={20}>
-          <Image src={Logo} alt="logo" />
+          <Image src={Logo} alt="logo" width={371} height={371} />
         </Flex>
       </Flex>
 
-
-      <Flex bgColor="white" p={4}>
-        <Box as="h2" fontSize="1.2rem" fontWeight="bold" >{tagLine}</Box>
+      <Flex bgColor="white" px={4}>
+        <Box as="h2" fontSize="1.5rem" fontWeight="bold">
+          {tagLine}
+        </Box>
       </Flex>
- 
+
       <Flex m={10} color="white">
-        <Button _hover={
-          {
-            color:"black",
-            bgColor:"white"
-          }
-        } variant="outline">
-         <Box as="span" mr={2}>{btnName}</Box> 
-        <ArrowForwardIcon />
+        <Button
+          _hover={{
+            color: "black",
+            bgColor: "white",
+          }}
+          variant="outline"
+          borderRadius={20}
+          px={8}
+        >
+          <Box as="span" mr={2}>
+            {btnName}
+          </Box>
+          <ArrowForwardIcon />
         </Button>
-        
       </Flex>
- 
- 
     </Flex>
-
-    
   );
 }
