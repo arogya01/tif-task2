@@ -7,14 +7,10 @@ const VideoLinks = ({ bg, videos }) => {
   const [videoInfo, setVideoInfo] = useState(null);
 
   return (
-    <Box as="section" width="100%" >
+    <Box as="section" width="100%">
       <Box>
         {videoInfo && (
-          <VideoModal
-            setVideoInfo={setVideoInfo}
-            videoInfo={videoInfo} 
-           
-          />
+          <VideoModal setVideoInfo={setVideoInfo} videoInfo={videoInfo} />
         )}
         <Flex
           width="100%"
@@ -22,19 +18,27 @@ const VideoLinks = ({ bg, videos }) => {
           justifyContent="space-between"
           align="center"
         >
-          <SimpleGrid  spacing="3rem"  columns={3}>
+          <SimpleGrid spacing="3rem" columns={3}>
             {videos.map((el) => {
-              
               return (
-                <Flex key={el.i} width="320px"  direction="column" align="center" >
-                <VideoThumbnail
-                  setVideoInfo={setVideoInfo}
-                  link={el.link}
-                  contentId={el.i}
-                  description={el.description}
-                />
-                <Box as="h3"  p="0.5rem"  fontWeight="bold">{el.headline}</Box>
-                <Box as="p"  p="0.5rem" >{el.content}</Box>
+                <Flex
+                  key={el.i}
+                  width="320px"
+                  direction="column"
+                  align="center"
+                >
+                  <VideoThumbnail
+                    setVideoInfo={setVideoInfo}
+                    link={el.link}
+                    contentId={el.i}
+                    description={el.description}
+                  />
+                  <Box as="h3" p="0.5rem" fontWeight="bold">
+                    {el.description.headline}
+                  </Box>
+                  <Box as="p" fontSize="12px" fontWeight="light" px="0.5rem">
+                    {el.description.content.slice(0, 75) + "...."}
+                  </Box>
                 </Flex>
               );
             })}
@@ -45,11 +49,11 @@ const VideoLinks = ({ bg, videos }) => {
   );
 };
 
-export const VideoThumbnail = ({ link, setVideoInfo ,description }) => {
+export const VideoThumbnail = ({ link, setVideoInfo, description }) => {
   const id = getYouTubeID(link);
   return (
     <Box
-      onClick={() => setVideoInfo({id,setVideoInfo,description})}
+      onClick={() => setVideoInfo({ id, setVideoInfo, description })}
       cursor="pointer"
       position="relative"
     >
@@ -61,7 +65,10 @@ export const VideoThumbnail = ({ link, setVideoInfo ,description }) => {
         width="40px"
         src="/play-button.svg"
       />
-      <Img width="100%" src={"http://img.youtube.com/vi/" + id + "/mqdefault.jpg"} />
+      <Img
+        width="100%"
+        src={"http://img.youtube.com/vi/" + id + "/mqdefault.jpg"}
+      />
     </Box>
   );
 };

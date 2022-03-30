@@ -1,8 +1,7 @@
 import { Flex, Box } from "@chakra-ui/react";
 import content from "./content/Events.json";
 import VideoLinks, { VideoThumbnail } from "./VideoLinks";
-import videos from './content/videos.json';
-
+import videos from "./content/Events.json";
 
 export default function Events({ header, tagLine }) {
   return (
@@ -17,7 +16,7 @@ export default function Events({ header, tagLine }) {
       </Box>
       <Flex direction="row" justify="center" align="center">
         <Box p={8}>
-         <VideoLinks videos={videos} />
+          <VideoLinks videos={videos} />
         </Box>
       </Flex>
     </Flex>

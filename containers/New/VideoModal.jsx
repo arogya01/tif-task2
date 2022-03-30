@@ -87,11 +87,12 @@ const VideoModal = ({ videoInfo, setVideoInfo }) => {
           />
         </svg>
       </Box>
-      <Flex mx="4rem">
+
+      <Flex mx="auto" py="2rem">
         <YouTube
           videoId={videoInfo.id}
           opts={{
-            width: `${dimensions.width * 0.6}px`,
+            width: `${dimensions.width * 0.4}px`,
             height: `${dimensions.height * 0.5}px`,
             playerVars: {
               modestbranding: 1,
@@ -103,26 +104,26 @@ const VideoModal = ({ videoInfo, setVideoInfo }) => {
           overflowY="scroll"
           flexDirection="column"
           width="400px"
-          height="526px"
+          height="330px"
           px="2rem"
           color="white"
           bg="#000"
         >
           <Box as="h2" fontSize="1.2rem" mb="2rem">
-            {videoInfo.description.headlineLong}
+            {videoInfo.description.headline}
           </Box>
           <Box
             as="p"
             fontWeight="light"
             mb="1rem"
             dangerouslySetInnerHTML={{
-              __html: videoInfo.description.contentLong,
+              __html: videoInfo.description.content,
             }}
           />
         </Flex>
       </Flex>
 
-      <Box overflow="hidden" pt="4rem" width="100%" mx="auto">
+      <Box overflow="hidden" pt="0" width="100%" mx="auto">
         <Carousel responsive={responsive}>
           {videos.map((el) => {
             console.log("videos is:", el);
