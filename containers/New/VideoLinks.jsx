@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Flex, SimpleGrid, Img } from "@chakra-ui/react";
-import getYouTubeID from "get-youtube-id";
 import VideoModal from "./VideoModal";
+import { getYouTubeIdFromLink } from "../../components/YoutubeId";
 
 const VideoLinks = ({ bg, videos }) => {
   const [videoInfo, setVideoInfo] = useState(null);
@@ -21,25 +21,11 @@ const VideoLinks = ({ bg, videos }) => {
           <SimpleGrid spacing="3rem" columns={3}>
             {videos.map((el) => {
               return (
-                <Flex
-                  key={el.i}
-                  width="320px"
-                  direction="column"
-                  align="center"
-                >
-                  <VideoThumbnail
-                    setVideoInfo={setVideoInfo}
-                    link={el.link}
-                    contentId={el.i}
-                    description={el.description}
-                  />
-                  <Box as="h3" p="0.5rem" fontWeight="bold">
-                    {el.description.headline}
-                  </Box>
-                  <Box as="p" fontSize="12px" fontWeight="light" px="0.5rem">
-                    {el.description.content.slice(0, 75) + "...."}
-                  </Box>
-                </Flex>
+                <VideoThumbnail
+                  key={el.link}
+                  setVideoInfo={setVideoInfo}
+                  link={el.link}
+                />
               );
             })}
           </SimpleGrid>
@@ -49,13 +35,44 @@ const VideoLinks = ({ bg, videos }) => {
   );
 };
 
-export const VideoThumbnail = ({ link, setVideoInfo, description }) => {
-  const id = getYouTubeID(link);
+export const VideoThumbnail = ({ link, setVideoInfo }) => {
+  const id = getYouTubeIdFromLink(link);
+  const [videoThumbnail, setVideoThumbnail] = useState("");
+  const [description, setDescription] = useState("");
+  const [headline, setHeadline] = useState("");
+
+  useEffect(() => {
+    try {
+      fetch(
+        `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${id}&key=${process.env.NEXT_PUBLIC_YT_KEY}`
+      )
+        .then((res) => {
+          const result = res.json();
+
+          return result;
+        })
+        .then((data) => {
+          console.log(data.items[0].snippet.thumbnails.medium.url);
+          setVideoThumbnail(data.items[0].snippet.thumbnails.medium.url);
+
+          setDescription(data.items[0].snippet.description);
+          setHeadline(data.items[0].snippet.title);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  }, [id]);
   return (
-    <Box
-      onClick={() => setVideoInfo({ id, setVideoInfo, description })}
+    <Flex
+      onClick={() => setVideoInfo({ id, headline, description })}
       cursor="pointer"
-      position="relative"
+      
+      width="320px"
+      direction="column"
+      align="center"
+    >
+    <Box
+    position="relative"
     >
       <Img
         position="absolute"
@@ -63,13 +80,17 @@ export const VideoThumbnail = ({ link, setVideoInfo, description }) => {
         left="50%"
         transform="translate(-50%, -50%)"
         width="40px"
-        src="/play-button.svg"
+        src="./play-button.svg"
       />
-      <Img
-        width="100%"
-        src={"http://img.youtube.com/vi/" + id + "/mqdefault.jpg"}
-      />
-    </Box>
+      <Img width="100%" src={videoThumbnail} />
+      </Box>
+      <Box as="h3" p="0.5rem" fontWeight="bold">
+        {headline}
+      </Box>
+      <Box as="p" fontSize="12px" fontWeight="light" px="0.5rem">
+        {description.slice(0, 75) + "...."}
+      </Box>
+    </Flex>
   );
 };
 

@@ -110,14 +110,14 @@ const VideoModal = ({ videoInfo, setVideoInfo }) => {
           bg="#000"
         >
           <Box as="h2" fontSize="1.2rem" mb="2rem">
-            {videoInfo.description.headline}
+            {videoInfo.headline}
           </Box>
           <Box
             as="p"
             fontWeight="light"
             mb="1rem"
             dangerouslySetInnerHTML={{
-              __html: videoInfo.description.content,
+              __html: videoInfo.description,
             }}
           />
         </Flex>
