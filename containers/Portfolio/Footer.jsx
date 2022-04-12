@@ -19,7 +19,7 @@ export default function Footer({ content }) {
           __html: content,
         }}
         textAlign="center"
-
+        pt="1rem"
       />
        <Button
           pr="1.5rem"

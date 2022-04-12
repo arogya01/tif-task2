@@ -8,7 +8,7 @@ import Layout from "../../components/Layout";
 
 export default function Portfolio() {
   return (
-    <>
+
     <Layout>
       <Port_Navbar />
       <Profile content="Over the years, I have the honour to collaborate with clients range from startups to SME, some of them has grown successfully or being acquired. Below are some of the works I've involved with." />
@@ -20,6 +20,5 @@ export default function Portfolio() {
 If you happen to have one, please get in touch."
       />
       </Layout>
-    </>
   );
 }

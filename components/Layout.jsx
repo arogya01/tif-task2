@@ -1,29 +1,95 @@
-import React, { ReactNode } from 'react'
-import { motion } from 'framer-motion'
+import React, { ReactNode } from "react";
+import { motion } from "framer-motion";
+import { useRouter } from "next/router";
 
+const slideUp = {
+  name: "Slide Up",
+  variants: {
+    initial: {
+      opacity: 0,
+      top: "100vh",
+      scale: 0.4,
+    },
+    animate: {
+      opacity: 1,
+      top: "0vh",
+      scale: 1,
+    },
+    exit: {
+      opacity: [0.7, 0],
+      top: "100vh",
+      scale: [0.8, 0.4],
+    },
+  },
+  transition: {
+    duration: 0.7,
+  },
+};
 
-const variants = {
-    hidden: { opacity: 0, x: -200, y: 0 },
-    enter: { opacity: 1, x: 0, y: 0 },
-    exit: { opacity: 0, x: 0, y: -100 },
-}
+const slideRight = {
+  name: "Slide Right",
+  variants: {
+    initial: {
+      opacity: 0,
+      left: "-200px",
+      scale: 0.6,
+    },
+    animate: {
+      opacity: 1,
+      left: 0,
+      scale: 1,
+    },
+    exit: {
+      opacity: 0,
+      left: "200px",
+      scale: 0.6,
+    },
+  },
+  transition: {
+    duration: 0.7,
+  },
+};
 
-const Layout = ({children}) => {
- return(
+const fadeBack = {
+  name: "Fade Back",
+  variants: {
+    initial: {
+      opacity: 0,
+      scale: 0.3,
+    },
+    animate: {
+      opacity: 1,
+      scale: 1,
+    },
+    exit: {
+      opacity: [0.6, 0],
+      scale: 0.3,
+    },
+  },
+  transition: {
+    duration: 0.5,
+  },
+};
 
+const Layout = (props) => {
+  const router = useRouter();
+
+  const url = `https://wallis.dev${router.route}`;
+
+  return (
     <div>
-        <motion.main
-            initial="hidden"
-            animate="enter"
-            exit="exit"
-            variants={variants}
-            transition={{ type: 'linear' }}
-           
-        >
-            {children}
-        </motion.main>
+      <motion.main
+        key={url}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        variants={fadeBack.variants}
+        transition={fadeBack.transition}
+      >
+        {props.children}
+      </motion.main>
     </div>
- )
-}
+  );
+};
 
 export default Layout;
